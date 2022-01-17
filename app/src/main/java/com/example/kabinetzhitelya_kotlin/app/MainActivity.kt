@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kabinetzhitelya_kotlin.R
+import com.example.kabinetzhitelya_kotlin.data.repositories.AuthRepository
 import com.example.kabinetzhitelya_kotlin.databinding.ActivityMainBinding
 import com.example.kabinetzhitelya_kotlin.ui.Screens
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -19,7 +20,12 @@ class MainActivity: AppCompatActivity() {
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        App.INSTANCE.router.newRootScreen(Screens.AuthScreen())
+        val cookie = AuthRepository.getCookie()
+        if (cookie == "") {
+            App.INSTANCE.router.newRootScreen(Screens.AuthScreen())
+        } else {
+            App.INSTANCE.router.newRootScreen(Screens.WebviewScreen())
+        }
     }
 
     override fun onResumeFragments() {

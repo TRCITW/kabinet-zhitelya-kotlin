@@ -42,4 +42,19 @@ object AuthRepository {
         }
     }
 
+    fun getCookie(): String {
+        val cookie = authPrefs.getString(PREFS_COOKIES, "")
+        if (cookie == null) {
+            return  ""
+        } else {
+            return cookie
+        }
+    }
+
+    fun clearCookie() {
+        authPrefs.edit {
+            remove(PREFS_COOKIES)
+        }
+    }
+
 }

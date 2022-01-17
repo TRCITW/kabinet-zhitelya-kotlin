@@ -8,15 +8,17 @@ class AuthInteractor {
 
     fun login(username: String, password: String): Flowable<SuccessAuthResponse> {
         return AuthRepository.login(username, password)
-            .doOnNext {
-                AuthRepository.saveToken(it.token, it.token)
-            }
     }
 
     fun register(number: Int, lastName: String, email: String): Flowable<SuccessAuthResponse> {
         return AuthRepository.register(number, lastName, email)
-            .doOnNext {
-                AuthRepository.saveToken(it.token, it.token)
-            }
+    }
+
+    fun getCookie(): String {
+        return AuthRepository.getCookie()
+    }
+
+    fun clearCookie() {
+        AuthRepository.clearCookie()
     }
 }

@@ -11,7 +11,6 @@ class CookieInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse = chain.proceed(chain.request())
         val cookie = originalResponse.headers("Set-Cookie")
-        Log.d("test", "${cookie}")
         AuthRepository.saveCookie(cookie.first())
         return originalResponse
     }

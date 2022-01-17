@@ -26,6 +26,8 @@ class SuccessRegisterFragment: BaseFragment() {
     override fun onStart() {
         super.onStart()
 
-        router.backTo(Screens.AuthScreen())
+        viewBinding.closeBtn.setOnClickListener {
+            router.backTo(Screens.AuthScreen())
+        }
     }
 }

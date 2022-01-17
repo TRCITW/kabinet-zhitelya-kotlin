@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">KabinetZhitelya-Kotlin</string>
 
+    <!--    Base-->
+    <string name="web_view_url">https://lk2.eis24.me/</string>
+    <string name="logout_url">https://lk2.eis24.me/#/auth/login/</string>
+
     <!--    Auth-->
     <string name="pay_by_qr">Оплата по QR</string>
     <string name="telegram_bot">Телеграм бот</string>
