@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class WebviewFragment: BaseFragment(), WebviewView {
 
     private lateinit var viewBinding: FragmentWebViewBinding
     private val presenter = WebviewPresenter()
+    private var cookies: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +55,7 @@ class WebviewFragment: BaseFragment(), WebviewView {
     }
 
     override fun loadWebview(withCookie: String) {
+        cookies = withCookie
         val url = getString(R.string.web_view_url)
         CookieManager.getInstance().setCookie(url, withCookie)
         viewBinding.webView.loadUrl(url)
@@ -81,8 +84,10 @@ class WebviewFragment: BaseFragment(), WebviewView {
         }
 
         viewBinding.webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+            val cookie = CookieManager.getInstance().getCookie(url)
             val request = DownloadManager.Request(Uri.parse(url))
             request.setMimeType(mimetype)
+            request.addRequestHeader("cookie", cookie);
             request.addRequestHeader("User-Agent", userAgent)
             request.setDescription("Старт загрузки файла...")
             request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimetype))
@@ -95,6 +100,10 @@ class WebviewFragment: BaseFragment(), WebviewView {
             val pm = App.INSTANCE.appContext
             val hasPerm = pm.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
             if (hasPerm) {
+                Toast.makeText(context,
+                    "Старт загрузки файла...",
+                    Toast.LENGTH_LONG).show()
+
                 dm.enqueue(request)
             } else {
                 Toast.makeText(
