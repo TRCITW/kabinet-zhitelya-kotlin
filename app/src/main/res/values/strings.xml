@@ -4,6 +4,12 @@
     <!--    Base-->
     <string name="web_view_url">https://lk2.eis24.me/</string>
     <string name="logout_url">https://lk2.eis24.me/#/auth/login/</string>
+    <string name="tickets">https://lk2.eis24.me/#/tickets/list/</string>
+    <string name="requests">https://lk2.eis24.me/#/requests/list/</string>
+    <string name="accruals">https://lk2.eis24.me/#/accruals/all/</string>
+    <string name="counters">https://lk2.eis24.me/#/meters/list/</string>
+    <string name="news">https://lk2.eis24.me/#/news/list/</string>
+    <string name="telegram_bot_url">https://web.telegram.org/z/</string>
 
     <!--    Auth-->
     <string name="pay_by_qr">Оплата по QR</string>
@@ -29,5 +35,7 @@
 
     <!-- Recovery-->
     <string name="forget_password">Забыли пароль?</string>
+    <string name="password_recovery">Восстановления пароля</string>
+    <string name="password_recovery_success">На вашу почту отправлено письмо с новым паролем от личного кабинета</string>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.example.kabinetzhitelya_kotlin.ui.auth
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
+import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.app.App
 import com.example.kabinetzhitelya_kotlin.domain.AuthInteractor
 import com.example.kabinetzhitelya_kotlin.ui.Screens
@@ -34,8 +37,8 @@ class AuthPresenter {
             authView?.updateState(AuthView.State.LOADING)
         }
         .subscribeBy(
-            onNext ={
-                router.newRootScreen(Screens.WebviewScreen())
+            onNext = {
+                router.newRootScreen(Screens.WebviewScreen(null))
                 authView?.updateState(AuthView.State.SUCCESS)
             },
             onError = { error ->
@@ -51,12 +54,15 @@ class AuthPresenter {
 
 
     fun navigateToTelegramBot() {
+////        val url = getString()
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     }
 
     fun navigateToQRCodeScan() {
     }
 
     fun navigateToPassRecovery() {
+        router.navigateTo(Screens.RecoveryPassScreen())
     }
 
     fun navigateToCreateAccount() {

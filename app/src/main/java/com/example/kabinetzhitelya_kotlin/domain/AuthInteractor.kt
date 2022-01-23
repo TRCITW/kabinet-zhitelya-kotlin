@@ -14,6 +14,10 @@ class AuthInteractor {
         return AuthRepository.register(number, lastName, email)
     }
 
+    fun recoveryPass(email: String): Flowable<SuccessAuthResponse> {
+        return AuthRepository.recoverPass(email)
+    }
+
     fun getCookie(): String {
         return AuthRepository.getCookie()
     }

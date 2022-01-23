@@ -1,11 +1,14 @@
 package com.example.kabinetzhitelya_kotlin.ui.auth
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.databinding.FragmentAuthBinding
 import com.example.kabinetzhitelya_kotlin.ui.base.fragment.BaseFragment
 
@@ -45,7 +48,10 @@ class AuthFragment: BaseFragment(), AuthView {
         }
 
         viewBinding.telegramBtn.setOnClickListener {
-            presenter.navigateToTelegramBot()
+            val url = getString(R.string.telegram_bot_url)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+//            presenter.navigateToTelegramBot()
         }
 
         viewBinding.emailTextInput.setOnTouchListener(OnTouchListener { v, event ->

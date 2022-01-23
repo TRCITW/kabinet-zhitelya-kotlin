@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "671525192168",
+    "firebase_url": "https://kabinet-zhitelyarf.firebaseio.com",
+    "project_id": "kabinet-zhitelyarf",
+    "storage_bucket": "kabinet-zhitelyarf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671525192168:android:a6840f17d763f33d8fa45d",
+        "android_client_info": {
+          "package_name": "com.example.kabinetzhitelya_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671525192168-eaaui531nsadoh96j7k2l8fe5kj43mjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbCBj9avYwjLyPodsOmguZQNkuPxs7p0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671525192168-eaaui531nsadoh96j7k2l8fe5kj43mjo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "671525192168-6o3e1j8djbk4d0t7ut5ofoekdub0h7vg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kabinet-zhitelya.rf",
+                "app_store_id": "1466655789"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671525192168:android:3cd2a197d4ae8d7f8fa45d",
+        "android_client_info": {
+          "package_name": "ru.showroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671525192168-eaaui531nsadoh96j7k2l8fe5kj43mjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbCBj9avYwjLyPodsOmguZQNkuPxs7p0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671525192168-eaaui531nsadoh96j7k2l8fe5kj43mjo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "671525192168-6o3e1j8djbk4d0t7ut5ofoekdub0h7vg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kabinet-zhitelya.rf",
+                "app_store_id": "1466655789"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

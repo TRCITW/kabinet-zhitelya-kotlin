@@ -19,6 +19,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.app.App
 import com.example.kabinetzhitelya_kotlin.databinding.FragmentWebViewBinding
@@ -30,6 +31,18 @@ class WebviewFragment: BaseFragment(), WebviewView {
     private lateinit var viewBinding: FragmentWebViewBinding
     private val presenter = WebviewPresenter()
     private var cookies: String? = null
+
+    companion object {
+        const val LINK = "link"
+
+        fun newInstance(link: String?): WebviewFragment {
+            val fragment = WebviewFragment()
+            fragment.arguments = bundleOf(
+                LINK to link
+            )
+            return fragment
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +71,31 @@ class WebviewFragment: BaseFragment(), WebviewView {
         cookies = withCookie
         val url = getString(R.string.web_view_url)
         CookieManager.getInstance().setCookie(url, withCookie)
-        viewBinding.webView.loadUrl(url)
+
+        val bundle = requireArguments()
+        val uri = bundle.getString(LINK)
+
+        if (uri == "/" || uri == null) {
+            viewBinding.webView.loadUrl(url)
+            return
+        }
+
+        if (uri!!.contains("tickets")) {
+            val url = getString(R.string.tickets)
+            viewBinding.webView.loadUrl(url)
+        } else if (uri!!.contains("requests")) {
+            val url = getString(R.string.requests)
+            viewBinding.webView.loadUrl(url)
+        } else if (uri!!.contains("accruals")) {
+            val url = getString(R.string.accruals)
+            viewBinding.webView.loadUrl(url)
+        } else if (uri!!.contains("counters")) {
+            val url = getString(R.string.counters)
+            viewBinding.webView.loadUrl(url)
+        } else if (uri!!.contains("news")) {
+            val url = getString(R.string.news)
+            viewBinding.webView.loadUrl(url)
+        }
     }
 
     override fun onDetach() {
@@ -111,7 +148,6 @@ class WebviewFragment: BaseFragment(), WebviewView {
                     "Для скачивания файлов необходимо выдать приложению доступ на запись в локальное хранилище в настройках",
                     Toast.LENGTH_LONG).show();
             }
-
         }
     }
 

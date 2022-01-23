@@ -1,6 +1,9 @@
 package com.example.kabinetzhitelya_kotlin.ui
 
 import com.example.kabinetzhitelya_kotlin.ui.auth.AuthFragment
+import com.example.kabinetzhitelya_kotlin.ui.pass_recovery.RecoveryFragment
+import com.example.kabinetzhitelya_kotlin.ui.pass_recovery.RecoveryView
+import com.example.kabinetzhitelya_kotlin.ui.pass_recovery.recovery_success.RecoverySuccessFragment
 import com.example.kabinetzhitelya_kotlin.ui.register.RegisterFragment
 import com.example.kabinetzhitelya_kotlin.ui.register.success_register.SuccessRegisterFragment
 import com.example.kabinetzhitelya_kotlin.ui.webview.WebviewFragment
@@ -14,6 +17,10 @@ object Screens {
 
     fun SuccessRegisterScreen() = FragmentScreen { SuccessRegisterFragment() }
 
-    fun WebviewScreen() = FragmentScreen { WebviewFragment() }
+    fun WebviewScreen(link: String?) = FragmentScreen { WebviewFragment.newInstance(link) }
+
+    fun RecoveryPassScreen() = FragmentScreen { RecoveryFragment() }
+
+    fun RecoverySuccessScreen() = FragmentScreen { RecoverySuccessFragment() }
 
 }
