@@ -30,6 +30,10 @@ class MainActivity: AppCompatActivity() {
             val token = task.result
             AuthRepository.saveFcmToken(token)
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         val cookie = AuthRepository.getCookie()
         if (cookie == "") {
@@ -40,15 +44,15 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun handleDeeplink() {
-
         Firebase.dynamicLinks
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData ->
                 if (pendingDynamicLinkData != null) {
                     var deeplink = pendingDynamicLinkData.link
                     App.INSTANCE.router.newRootScreen(Screens.WebviewScreen(deeplink.toString()))
+                } else {
+                    App.INSTANCE.router.newRootScreen(Screens.WebviewScreen(null))
                 }
-                App.INSTANCE.router.newRootScreen(Screens.WebviewScreen(null))
             }
             .addOnFailureListener(this) { error ->
                 App.INSTANCE.router.newRootScreen(Screens.WebviewScreen(null))

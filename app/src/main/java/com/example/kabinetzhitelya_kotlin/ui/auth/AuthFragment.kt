@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.databinding.FragmentAuthBinding
 import com.example.kabinetzhitelya_kotlin.ui.base.fragment.BaseFragment
+import java.util.regex.Pattern
 
 
 class AuthFragment: BaseFragment(), AuthView {
@@ -36,7 +37,8 @@ class AuthFragment: BaseFragment(), AuthView {
         viewBinding.passwordTextInput.visibility = View.GONE
 
         viewBinding.forgetPassBtn.setOnClickListener {
-            presenter.navigateToPassRecovery()
+            val email = viewBinding.emailTextInput.text.toString()
+            presenter.navigateToPassRecovery(email)
         }
 
         viewBinding.createAccountBtn.setOnClickListener {
@@ -66,8 +68,18 @@ class AuthFragment: BaseFragment(), AuthView {
                     viewBinding.emailTextInput.compoundDrawables
                         .get(DRAWABLE_RIGHT).getBounds().width()
                 ) {
-                    viewBinding.passwordTextInput.visibility = View.VISIBLE
-                    return@OnTouchListener true
+
+                    val pattern = Pattern.compile(".+@.+\\.[a-z]+")
+                    val matcher = pattern.matcher(viewBinding.emailTextInput.text.toString())
+                    if (matcher.matches()) {
+                        viewBinding.passwordTextInput.visibility = View.VISIBLE
+                        viewBinding.passwordTextInput.requestFocus()
+                        viewBinding.forgetPassBtn.visibility = View.VISIBLE
+                        return@OnTouchListener true
+                    } else {
+                        val text = getString(R.string.incorrect_email)
+                        viewBinding.emailTextInput.error = text
+                    }
                 }
             }
             false

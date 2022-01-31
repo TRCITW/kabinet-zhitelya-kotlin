@@ -2,6 +2,7 @@ package com.example.kabinetzhitelya_kotlin.domain
 
 import com.example.kabinetzhitelya_kotlin.data.network.models.SuccessAuthResponse
 import com.example.kabinetzhitelya_kotlin.data.repositories.AuthRepository
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 class AuthInteractor {
@@ -10,11 +11,11 @@ class AuthInteractor {
         return AuthRepository.login(username, password)
     }
 
-    fun register(number: Int, lastName: String, email: String): Flowable<SuccessAuthResponse> {
+    fun register(number: String, lastName: String, email: String): Flowable<SuccessAuthResponse> {
         return AuthRepository.register(number, lastName, email)
     }
 
-    fun recoveryPass(email: String): Flowable<SuccessAuthResponse> {
+    fun recoveryPass(email: String): Completable {
         return AuthRepository.recoverPass(email)
     }
 

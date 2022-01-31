@@ -25,7 +25,7 @@ class RegisterPresenter {
         compositeDisposable.clear()
     }
 
-    fun register(number: Int, lastName: String, email: String) = authInteractor.register(number, lastName, email)
+    fun register(number: String, lastName: String, email: String) = authInteractor.register(number, lastName, email)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe {

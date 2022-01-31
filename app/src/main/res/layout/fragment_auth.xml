@@ -61,12 +61,13 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/ic_border_for_button"
+        android:isScrollContainer="false"
         android:text="@string/pay_by_qr"
         android:textAllCaps="false"
         android:textColor="@color/custom_blue"
         android:textSize="18sp"
         app:icon="@drawable/ic_qr_icon"
-        app:iconGravity="textEnd"
+        app:iconGravity="textEnd|top|textTop|end|textStart"
         app:iconPadding="7dp"
         app:layout_constraintBottom_toTopOf="@+id/telegram_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +100,7 @@
         android:textAllCaps="false"
         android:textColor="@color/custom_blue"
         android:textSize="13sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -107,11 +109,11 @@
         android:id="@+id/linearLayout"
         android:layout_width="343dp"
         android:layout_height="18dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/pay_by_qr_btn"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -145,5 +147,42 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/pay_by_qr_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:layout_weight="2"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="или" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:layout_weight="2"
+            android:background="@android:color/darker_gray" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

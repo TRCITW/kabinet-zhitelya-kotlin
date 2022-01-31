@@ -28,7 +28,7 @@ class RegisterFragment: BaseFragment(), RegisterView {
         viewBinding.registerProgressBar.visibility = View.GONE
 
         viewBinding.registerButton.setOnClickListener {
-            val accountNumber = viewBinding.accountNumberTextInput.text.toString().toInt()
+            val accountNumber = viewBinding.accountNumberTextInput.text.toString()
             val name = viewBinding.hostNameTextInput.text.toString()
             val email = viewBinding.emailTextInputRegistration.text.toString()
             presenter.register(accountNumber, name, email)

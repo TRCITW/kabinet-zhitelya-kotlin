@@ -27,7 +27,7 @@
         android:background="@drawable/ic_rounded_background_text_input"
         android:ems="10"
         android:hint="@string/receipt_hint"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"

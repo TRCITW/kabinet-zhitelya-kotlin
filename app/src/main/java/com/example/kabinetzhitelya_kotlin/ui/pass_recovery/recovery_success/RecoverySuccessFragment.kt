@@ -27,7 +27,7 @@ class RecoverySuccessFragment: BaseFragment() {
         super.onStart()
 
         viewBinding.recoverySuccessCloseBtn.setOnClickListener {
-            router.backTo(Screens.AuthScreen())
+            router.newRootScreen(Screens.AuthScreen())
         }
     }
 

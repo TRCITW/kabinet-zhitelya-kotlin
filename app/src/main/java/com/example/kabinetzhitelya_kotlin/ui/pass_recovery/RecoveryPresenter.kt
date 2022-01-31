@@ -33,18 +33,22 @@ class RecoveryPresenter {
             recoveryView?.updateState(RecoveryView.State.LOADING)
         }
         .subscribeBy(
-            onNext = {
-                router.newRootScreen(Screens.RecoverySuccessScreen())
-                recoveryView?.updateState(RecoveryView.State.SUCCESS)
-            },
             onError = { error ->
                 if (error is HttpException) {
                     val code = error.code()
                     when (code) {
-                        403 -> recoveryView?.showError("Invalid login or password")
+                        403 -> {
+                            recoveryView?.showError("Invalid login or password")
+                            return@subscribeBy
+                        }
                     }
                 }
+                router.newRootScreen(Screens.RecoverySuccessScreen())
                 recoveryView?.updateState(RecoveryView.State.ERROR)
+            },
+            onComplete = {
+                router.newRootScreen(Screens.RecoverySuccessScreen())
+                recoveryView?.updateState(RecoveryView.State.SUCCESS)
             }
         ).addTo(compositeDisposable)
 

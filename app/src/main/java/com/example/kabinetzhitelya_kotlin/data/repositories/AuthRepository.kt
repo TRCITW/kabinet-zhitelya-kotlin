@@ -7,6 +7,7 @@ import com.example.kabinetzhitelya_kotlin.data.network.models.LoginUserDTO
 import com.example.kabinetzhitelya_kotlin.data.network.models.RecoveryDTO
 import com.example.kabinetzhitelya_kotlin.data.network.models.RegisterUserDTO
 import com.example.kabinetzhitelya_kotlin.data.network.models.SuccessAuthResponse
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import kotlinx.serialization.SerialName
 
@@ -26,17 +27,16 @@ object AuthRepository {
             .toFlowable()
     }
 
-    fun register(number: Int, lastName: String, email: String): Flowable<SuccessAuthResponse> {
+    fun register(number: String, lastName: String, email: String): Flowable<SuccessAuthResponse> {
         val fcmToken: String = authPrefs.getString(FCM_TOKEN, "").toString()
         val dto = RegisterUserDTO(number, lastName, email, fcmToken)
         return retrofitClient.register(dto)
             .toFlowable()
     }
 
-    fun recoverPass(email: String): Flowable<SuccessAuthResponse> {
+    fun recoverPass(email: String): Completable {
         val dto = RecoveryDTO(email)
         return retrofitClient.recovery(dto)
-            .toFlowable()
     }
 
     fun saveToken(token: String, cookies: String) {

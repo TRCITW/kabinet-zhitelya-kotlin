@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KabinetZhitelya-Kotlin</string>
+    <string name="app_name">Кабинет-жителя.рф</string>
 
     <!--    Base-->
     <string name="web_view_url">https://lk2.eis24.me/</string>
@@ -9,15 +9,16 @@
     <string name="accruals">https://lk2.eis24.me/#/accruals/all/</string>
     <string name="counters">https://lk2.eis24.me/#/meters/list/</string>
     <string name="news">https://lk2.eis24.me/#/news/list/</string>
-    <string name="telegram_bot_url">https://web.telegram.org/z/</string>
+    <string name="telegram_bot_url">https://t.me/arseniy_kabinet_bot</string>
 
     <!--    Auth-->
-    <string name="pay_by_qr">Оплата по QR</string>
+    <string name="pay_by_qr">Оплата по QR коду</string>
     <string name="telegram_bot">Телеграм бот</string>
     <string name="dont_have_account">Ещё нет аккаунта?</string>
     <string name="create_account">Создайте аккаунт</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Пароль</string>
+    <string name="incorrect_email">Неверный формат почты</string>
     
     <!-- Sign Up-->
     <string name="sign_up_title">Регистрация личного кабинета</string>
@@ -37,5 +38,8 @@
     <string name="forget_password">Забыли пароль?</string>
     <string name="password_recovery">Восстановления пароля</string>
     <string name="password_recovery_success">На вашу почту отправлено письмо с новым паролем от личного кабинета</string>
+
+    <!-- QRCode-->
+    <string name="camera_permission_required">Для сканирования требуется доступ к камере</string>
 
 </resources>

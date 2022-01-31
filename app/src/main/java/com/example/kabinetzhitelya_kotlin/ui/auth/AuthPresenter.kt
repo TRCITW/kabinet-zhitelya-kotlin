@@ -59,10 +59,11 @@ class AuthPresenter {
     }
 
     fun navigateToQRCodeScan() {
+        router.navigateTo(Screens.ScanQRCodeScreen())
     }
 
-    fun navigateToPassRecovery() {
-        router.navigateTo(Screens.RecoveryPassScreen())
+    fun navigateToPassRecovery(email: String?) {
+        router.navigateTo(Screens.RecoveryPassScreen(email))
     }
 
     fun navigateToCreateAccount() {

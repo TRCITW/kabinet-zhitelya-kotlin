@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.app.App
@@ -57,14 +55,15 @@ class WebviewFragment: BaseFragment(), WebviewView {
     override fun onStart() {
         super.onStart()
 
+        configureWebview()
         presenter.bind(this)
 
         val permissions = arrayOf<String>(
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
         )
         ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
 
-        configureWebview()
     }
 
     override fun loadWebview(withCookie: String) {
@@ -78,21 +77,23 @@ class WebviewFragment: BaseFragment(), WebviewView {
         if (uri == "/" || uri == null) {
             viewBinding.webView.loadUrl(url)
             return
+        } else {
+            CookieManager.getInstance().setCookie(uri, withCookie)
         }
 
-        if (uri!!.contains("tickets")) {
+        if (uri?.contains("tickets")) {
             val url = getString(R.string.tickets)
             viewBinding.webView.loadUrl(url)
-        } else if (uri!!.contains("requests")) {
+        } else if (uri?.contains("requests")) {
             val url = getString(R.string.requests)
             viewBinding.webView.loadUrl(url)
-        } else if (uri!!.contains("accruals")) {
+        } else if (uri?.contains("accruals")) {
             val url = getString(R.string.accruals)
             viewBinding.webView.loadUrl(url)
-        } else if (uri!!.contains("counters")) {
+        } else if (uri?.contains("counters")) {
             val url = getString(R.string.counters)
             viewBinding.webView.loadUrl(url)
-        } else if (uri!!.contains("news")) {
+        } else if (uri?.contains("news")) {
             val url = getString(R.string.news)
             viewBinding.webView.loadUrl(url)
         }
@@ -113,7 +114,8 @@ class WebviewFragment: BaseFragment(), WebviewView {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
 
-                val authUrl = getString(R.string.logout_url)
+//                val authUrl = getString(R.string.logout_url)
+                val authUrl = "https://lk2.eis24.me/#/auth/login/"
                 if (url == authUrl) {
                     presenter.navigateToAuth()
                 }
