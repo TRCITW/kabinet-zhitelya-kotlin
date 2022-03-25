@@ -3,13 +3,14 @@ package com.example.kabinetzhitelya_kotlin.data.repositories
 import androidx.core.content.edit
 import com.example.kabinetzhitelya_kotlin.data.PreferenseStorage
 import com.example.kabinetzhitelya_kotlin.data.network.RetrofitClient
-import com.example.kabinetzhitelya_kotlin.data.network.models.LoginUserDTO
-import com.example.kabinetzhitelya_kotlin.data.network.models.RecoveryDTO
-import com.example.kabinetzhitelya_kotlin.data.network.models.RegisterUserDTO
-import com.example.kabinetzhitelya_kotlin.data.network.models.SuccessAuthResponse
+import com.example.kabinetzhitelya_kotlin.data.network.models.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import kotlinx.serialization.SerialName
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 object AuthRepository {
 
@@ -20,16 +21,27 @@ object AuthRepository {
     private val authPrefs = PreferenseStorage.authPrefs
 
     fun login(username: String, password: String): Flowable<SuccessAuthResponse> {
-        val fcmToken: String = authPrefs.getString(FCM_TOKEN, "").toString()
+        val fcmToken: String? = authPrefs.getString(FCM_TOKEN, null)
         val dto = LoginUserDTO(username, password, fcmToken)
 
         return retrofitClient.login(dto)
             .toFlowable()
     }
 
-    fun register(number: String, lastName: String, email: String): Flowable<SuccessAuthResponse> {
+    fun register(number: String, lastName: String, email: String): Flowable<ErrorResponse> {
         val fcmToken: String = authPrefs.getString(FCM_TOKEN, "").toString()
         val dto = RegisterUserDTO(number, lastName, email, fcmToken)
+//        val res = retrofitClient.register(dto).enqueue(object : Callback<ResponseBody> {
+//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+
+
         return retrofitClient.register(dto)
             .toFlowable()
     }

@@ -1,8 +1,6 @@
 package com.example.kabinetzhitelya_kotlin.app
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.data.repositories.AuthRepository
@@ -12,7 +10,6 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity: AppCompatActivity() {
@@ -30,10 +27,6 @@ class MainActivity: AppCompatActivity() {
             val token = task.result
             AuthRepository.saveFcmToken(token)
         })
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         val cookie = AuthRepository.getCookie()
         if (cookie == "") {
@@ -68,5 +61,6 @@ class MainActivity: AppCompatActivity() {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
+
 
 }

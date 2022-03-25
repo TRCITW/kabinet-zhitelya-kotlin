@@ -6,6 +6,7 @@ import com.example.kabinetzhitelya_kotlin.ui.Screens
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
@@ -46,8 +47,8 @@ class RegisterPresenter {
                         }
                     }
                 }
-            }
-        )
+            },
+        ).addTo(compositeDisposable)
 
     fun cancelPressed() {
         router.backTo(Screens.AuthScreen())

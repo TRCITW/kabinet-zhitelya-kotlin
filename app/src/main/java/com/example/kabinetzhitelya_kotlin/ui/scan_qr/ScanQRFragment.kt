@@ -43,7 +43,6 @@ class ScanQRFragment: BaseFragment(), ScanQRView {
         scanner = CodeScanner(activity, viewBinding.scannerView)
         scanner.decodeCallback = DecodeCallback { res ->
             activity.runOnUiThread {
-//                Log.d("test", res.text)
                 presenter.sendCode(res.text)
             }
         }

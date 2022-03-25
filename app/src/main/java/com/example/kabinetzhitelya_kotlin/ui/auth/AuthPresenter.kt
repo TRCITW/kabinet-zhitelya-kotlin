@@ -1,9 +1,5 @@
 package com.example.kabinetzhitelya_kotlin.ui.auth
 
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
-import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.app.App
 import com.example.kabinetzhitelya_kotlin.domain.AuthInteractor
 import com.example.kabinetzhitelya_kotlin.ui.Screens
@@ -45,10 +41,12 @@ class AuthPresenter {
                 if (error is HttpException) {
                     val code = error.code()
                     when (code) {
-                        403 -> authView?.showError("Invalid login or password")
+                        400 -> {
+                            authView?.showError("Неверный логин или пароль")
+                            authView?.updateState(AuthView.State.ERROR)
+                        }
                     }
                 }
-                authView?.updateState(AuthView.State.ERROR)
             }
         ).addTo(compositeDisposable)
 

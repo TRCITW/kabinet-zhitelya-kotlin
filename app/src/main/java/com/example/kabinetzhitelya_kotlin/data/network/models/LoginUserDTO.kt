@@ -12,6 +12,6 @@ data class LoginUserDTO(
     val password: String,
 
     @SerialName("fcm_token")
-    val fcmToken: String
+    val fcmToken: String?
 
 )

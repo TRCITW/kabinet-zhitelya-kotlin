@@ -43,7 +43,7 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/ic_rounded_background_text_input"
         android:ems="10"
-        android:hint="@string/host_second_name"
+        android:hint="@string/second_name_hint"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"

@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="305dp"
-        android:layout_height="304dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="185dp"
+        android:layout_height="139dp"
+        android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,8 +17,10 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="@string/password_recovery_success"
         android:textColor="@color/custom_blue"

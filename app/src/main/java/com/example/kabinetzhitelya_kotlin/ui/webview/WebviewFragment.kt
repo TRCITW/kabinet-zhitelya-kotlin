@@ -2,6 +2,7 @@ package com.example.kabinetzhitelya_kotlin.ui.webview
 
 import android.app.DownloadManager
 import android.content.Context.DOWNLOAD_SERVICE
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -51,9 +52,8 @@ class WebviewFragment: BaseFragment(), WebviewView {
         return viewBinding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         configureWebview()
         presenter.bind(this)
@@ -63,7 +63,6 @@ class WebviewFragment: BaseFragment(), WebviewView {
             android.Manifest.permission.ACCESS_FINE_LOCATION
         )
         ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
-
     }
 
     override fun loadWebview(withCookie: String) {
@@ -90,7 +89,7 @@ class WebviewFragment: BaseFragment(), WebviewView {
         } else if (uri?.contains("accruals")) {
             val url = getString(R.string.accruals)
             viewBinding.webView.loadUrl(url)
-        } else if (uri?.contains("counters")) {
+        } else if (uri?.contains("meters")) {
             val url = getString(R.string.counters)
             viewBinding.webView.loadUrl(url)
         } else if (uri?.contains("news")) {
@@ -101,7 +100,6 @@ class WebviewFragment: BaseFragment(), WebviewView {
 
     override fun onDetach() {
         super.onDetach()
-
         presenter.unbind()
     }
 
@@ -113,11 +111,18 @@ class WebviewFragment: BaseFragment(), WebviewView {
         viewBinding.webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-
+                if (url == null) return
 //                val authUrl = getString(R.string.logout_url)
-                val authUrl = "https://lk2.eis24.me/#/auth/login/"
-                if (url == authUrl) {
+//                val authUrl = "https://lk2.eis24.me/#/auth/login/"
+                if (url.contains("auth")) {
                     presenter.navigateToAuth()
+                } else if (url.contains("arseniy")) {
+                    val mainUrl = getString(R.string.web_view_url)
+                    viewBinding.webView.loadUrl(mainUrl)
+
+                    val url = getString(R.string.telegram_bot_url)
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
                 }
             }
         }

@@ -45,5 +45,4 @@ class ScanQRPresenter {
             }
         ).addTo(compositeDisposable)
 
-
 }

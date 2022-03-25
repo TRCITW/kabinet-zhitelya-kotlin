@@ -2,6 +2,7 @@ package com.example.kabinetzhitelya_kotlin.data.network
 
 import com.example.kabinetzhitelya_kotlin.BuildConfig
 import com.example.kabinetzhitelya_kotlin.data.network.interceptors.CookieInterceptor
+import com.example.kabinetzhitelya_kotlin.data.network.interceptors.TransferRemoveInterceptor
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -9,6 +10,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
@@ -33,6 +35,7 @@ object RetrofitClient {
 //            addInterceptor(XRequestedHeaderInterceptor())
 //            addInterceptor(AuthTokenInterceptor())
             addInterceptor(CookieInterceptor())
+            addInterceptor(TransferRemoveInterceptor())
             addLoggingInterceptorIfNeeded()
         }
             .cookieJar(MyCookieJar())

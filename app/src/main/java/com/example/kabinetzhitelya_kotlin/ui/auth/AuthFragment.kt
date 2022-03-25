@@ -3,14 +3,20 @@ package com.example.kabinetzhitelya_kotlin.ui.auth
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.os.bundleOf
 import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.databinding.FragmentAuthBinding
 import com.example.kabinetzhitelya_kotlin.ui.base.fragment.BaseFragment
+import com.example.kabinetzhitelya_kotlin.ui.base.fragment.hideKeyboard
 import java.util.regex.Pattern
 
 
@@ -28,12 +34,12 @@ class AuthFragment: BaseFragment(), AuthView {
         return viewBinding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         presenter.bind(this)
 
         viewBinding.progressBar.visibility = View.GONE
-
         viewBinding.passwordTextInput.visibility = View.GONE
 
         viewBinding.forgetPassBtn.setOnClickListener {
@@ -53,7 +59,6 @@ class AuthFragment: BaseFragment(), AuthView {
             val url = getString(R.string.telegram_bot_url)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
-//            presenter.navigateToTelegramBot()
         }
 
         viewBinding.emailTextInput.setOnTouchListener(OnTouchListener { v, event ->
@@ -68,13 +73,14 @@ class AuthFragment: BaseFragment(), AuthView {
                     viewBinding.emailTextInput.compoundDrawables
                         .get(DRAWABLE_RIGHT).getBounds().width()
                 ) {
-
                     val pattern = Pattern.compile(".+@.+\\.[a-z]+")
                     val matcher = pattern.matcher(viewBinding.emailTextInput.text.toString())
                     if (matcher.matches()) {
                         viewBinding.passwordTextInput.visibility = View.VISIBLE
                         viewBinding.passwordTextInput.requestFocus()
                         viewBinding.forgetPassBtn.visibility = View.VISIBLE
+                        val icon = R.drawable.ic_ready
+                        viewBinding.emailTextInput.setCompoundDrawablesWithIntrinsicBounds(0, 0,  icon, 0)
                         return@OnTouchListener true
                     } else {
                         val text = getString(R.string.incorrect_email)
@@ -105,7 +111,6 @@ class AuthFragment: BaseFragment(), AuthView {
             }
             false
         })
-
     }
 
     override fun onDestroy() {
@@ -115,6 +120,7 @@ class AuthFragment: BaseFragment(), AuthView {
 
     override fun updateState(state: AuthView.State) {
         viewBinding.progressBar.visibility = View.GONE
+        hideKeyboard()
         when (state) {
             AuthView.State.LOADING -> {
                 viewBinding.progressBar.visibility = View.VISIBLE

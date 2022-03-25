@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.kabinetzhitelya_kotlin.R
 import com.example.kabinetzhitelya_kotlin.databinding.FragmentRegisterBinding
 import com.example.kabinetzhitelya_kotlin.ui.base.fragment.BaseFragment
+import java.util.regex.Pattern
 
 class RegisterFragment: BaseFragment(), RegisterView {
 
@@ -26,6 +28,16 @@ class RegisterFragment: BaseFragment(), RegisterView {
 
         presenter.bind(this)
         viewBinding.registerProgressBar.visibility = View.GONE
+
+//        val pattern = Pattern.compile(".+@.+\\.[a-z]+")
+//        val matcher = pattern.matcher(viewBinding.emailTextInputRegistration.text.toString())
+//        if (matcher.matches()) {
+//
+//        } else {
+//
+//        }
+//
+//        viewBinding
 
         viewBinding.registerButton.setOnClickListener {
             val accountNumber = viewBinding.accountNumberTextInput.text.toString()
