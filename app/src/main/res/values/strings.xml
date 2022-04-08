@@ -25,6 +25,7 @@
     <string name="sign_up_title">Регистрация личного кабинета</string>
     <string name="account_id">№ лицевого счета</string>
     <string name="specified_in_receipt">Указан в квитанции квартплаты</string>
+    <string name="example_email">example@mail.ru</string>
     <string name="receipt_hint">4353453535345</string>
     <string name="host_second_name">Фамилия собственника</string>
     <string name="future_login">Будущий логин</string>
